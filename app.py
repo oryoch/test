@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template
 import datetime
+import os
 
 app = Flask(__name__)
 
@@ -9,11 +10,6 @@ def index():
     man = None
 
     if request.method == "POST":
-        total = request.form.get("total")
-        man = request.form.get("man")
-
-        with open("data.txt", "a", encoding="utf-8") as f:
-        f.write(f"{datetime.datetime.now()} | 合計:{total}円 | 手取り:{man}円\n")
         yachin = int(request.form["yachin"])
         shikikin = int(request.form["shikikin"])
         reikin = int(request.form["reikin"])
@@ -46,11 +42,13 @@ def index():
 
         man = round(total / 10000, 1)
 
-    from flask import Flask, request, render_template
+        # 保存処理
+        with open("data.txt", "a", encoding="utf-8") as f:
+            f.write(f"{datetime.datetime.now()} | 合計:{total}円 | 手取り:{man}万円\n")
 
-return render_template("index.html", total=total, man=man)
+    return render_template("index.html", total=total, man=man)
 
-import os
 
-port = int(os.environ.get("PORT", 5000))
-app.run(host="0.0.0.0", port=port)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
