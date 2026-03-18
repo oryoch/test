@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template
+import datetime
 
 app = Flask(__name__)
 
@@ -8,6 +9,11 @@ def index():
     man = None
 
     if request.method == "POST":
+        total = request.form.get("total")
+        man = request.form.get("man")
+
+        with open("data.txt", "a", encoding="utf-8") as f:
+        f.write(f"{datetime.datetime.now()} | 合計:{total}円 | 手取り:{man}円\n")
         yachin = int(request.form["yachin"])
         shikikin = int(request.form["shikikin"])
         reikin = int(request.form["reikin"])
