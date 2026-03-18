@@ -2,45 +2,90 @@ from flask import Flask, request, render_template_string
 
 app = Flask(__name__)
 
-HTML = """
 <!DOCTYPE html>
 <html>
 <head>
-    <title>初期費用計算</title>
+    <title>初期費用計算ツール</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>初期費用計算ツール</h2>
-    <form method="post">
-        家賃：<input name="yachin"><br>
-        敷金（月）：<input name="shikikin"><br>
-        礼金（月）：<input name="reikin"><br>
-        保証料（%）：<input name="hoshou"><br>
+<body class="bg-light">
 
-        前家賃：
-        <select name="mae">
-            <option value="1">1ヶ月</option>
-            <option value="2">2ヶ月</option>
-        </select><br>
+<div class="container mt-5">
+    <div class="card p-4 shadow">
+        <h2 class="mb-4 text-center">初期費用計算ツール</h2>
 
-        仲介手数料：
-        <select name="chukai">
-            <option value="1">通常</option>
-            <option value="2">20%オフ</option>
-            <option value="3">50%オフ</option>
-            <option value="4">22000円</option>
-        </select><br>
+        <form method="post">
+            <div class="mb-3">
+                <label class="form-label">家賃</label>
+                <input name="yachin" class="form-control">
+            </div>
 
-        鍵交換：<input name="kagi"><br>
-        消毒：<input name="shoudoku"><br>
-        クリーニング：<input name="cleaning"><br>
-        保険：<input name="hoken"><br>
+            <div class="mb-3">
+                <label class="form-label">敷金（月）</label>
+                <input name="shikikin" class="form-control">
+            </div>
 
-        <button type="submit">計算</button>
-    </form>
+            <div class="mb-3">
+                <label class="form-label">礼金（月）</label>
+                <input name="reikin" class="form-control">
+            </div>
 
-    {% if total %}
-        <h3>合計：{{ total }}円（約{{ man }}万円）</h3>
-    {% endif %}
+            <div class="mb-3">
+                <label class="form-label">保証料（%）</label>
+                <input name="hoshou" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">前家賃</label>
+                <select name="mae" class="form-select">
+                    <option value="1">1ヶ月</option>
+                    <option value="2">2ヶ月</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">仲介手数料</label>
+                <select name="chukai" class="form-select">
+                    <option value="1">通常</option>
+                    <option value="2">20%オフ</option>
+                    <option value="3">50%オフ</option>
+                    <option value="4">22000円</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">鍵交換</label>
+                <input name="kagi" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">消毒</label>
+                <input name="shoudoku" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">クリーニング</label>
+                <input name="cleaning" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">保険</label>
+                <input name="hoken" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">計算する</button>
+        </form>
+
+        {% if total %}
+        <div class="alert alert-success mt-4 text-center">
+            <h4>合計：{{ total }}円</h4>
+            <h5>約 {{ man }} 万円</h5>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+
 </body>
 </html>
 """
