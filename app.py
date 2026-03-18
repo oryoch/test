@@ -78,7 +78,7 @@ app = Flask(__name__)
 
         {% if total %}
         <div class="alert alert-success mt-4 text-center">
-            <h4>合計：{{ total }}円</h4>
+            <h4>合計: {{ total }}円</h4>
             <h5>約 {{ man }} 万円</h5>
         </div>
         {% endif %}
