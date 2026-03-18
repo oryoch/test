@@ -21,17 +21,17 @@ app = Flask(__name__)
             </div>
 
             <div class="mb-3">
-                <label class="form-label">敷金（月）</label>
+                <label class="form-label">敷金(月)</label>
                 <input name="shikikin" class="form-control">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">礼金（月）</label>
+                <label class="form-label">礼金(月)</label>
                 <input name="reikin" class="form-control">
             </div>
 
             <div class="mb-3">
-                <label class="form-label">保証料（%）</label>
+                <label class="form-label">保証料(%)</label>
                 <input name="hoshou" class="form-control">
             </div>
 
